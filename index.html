@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/plain; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TN Loan DApp Statistics</title>
+    <title>WAVES Loan DApp Statistics</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
         .no-focus:focus{
@@ -52,15 +52,15 @@
         
         <div class="mx-auto p-md-5 p-4 rounded-lg text-white" style="background-color: #ff007f; max-width: 450px;">
             <h4 class="text-center mb-4">Tradecoin Loan DApp Calculator</h4>
-            Enter Your TN Amount for Collateral:
+            Enter Your WAVES Amount for Collateral:
             <input type="number" id="amount" onchange="Calculate()" class="form-control no-focus p-3"><br>
-            Interest Rate Per Day for 1000 TN:
-            <input id="rate" type="text" value="0.9792 TN" class="form-control no-focus p-3" readonly><br>
+            Interest Rate Per Day for 1000 WAVES:
+            <input id="rate" type="text" value="0.9792 WAVES" class="form-control no-focus p-3" readonly><br>
             Loan Period (1-90 Days):
             <input id="days" type="number" min="2" max="90" class="form-control no-focus p-3" onchange="Calculate()"><br>
             <h4 id="total"></h4>
             <button class="btn btn-success w-100 py-3" onclick="Calculate()">Calculate</button><br><br>
-            <button class="btn btn-success w-100 py-3" onclick="location.href='https://polarity.exchange/dapps?dapp=3JhY5JU9TsWJnuXXznZsSf2dGSNujkBQATA';">Proceed For Loan	</button>
+            <button class="btn btn-success w-100 py-3" onclick="location.href='http://tradecointoken.com';">Proceed For Loan	</button>
         </div>
 
         <div class="container-fluid mx-auto py-5 px-lg-5">
@@ -87,7 +87,7 @@
         </div>
     </div>
     <script>
-        const APIURL = "https://tnnode.turtlenetwork.eu/addresses/data/3JhY5JU9TsWJnuXXznZsSf2dGSNujkBQATA";
+        const APIURL = "https://nodes.wavesnodes.com/addresses/data/3PHwL6FTA7Axjo44tpTGTjhgcfqc4xGY576";
         var loanData = '';
         var loading = document.getElementById("loading");
         var mainArea = document.getElementById("mainArea");
@@ -99,19 +99,19 @@
             var responseObject = await fetch(APIURL);
             loanData = await responseObject.json();
 
-            var panel1ResponseObject = await fetch("https://tnnode.turtlenetwork.eu/addresses/data/3Jr6cqFtjxLr47JRKAL78dvyLamCtT29Vzd?key=eligibilityfactor");
+            var panel1ResponseObject = await fetch("https://nodes.wavesnodes.com/addresses/data/3PHwL6FTA7Axjo44tpTGTjhgcfqc4xGY576?key=eligibilityfactor");
             panel1Data = await panel1ResponseObject.json();
             document.getElementById("panel1").innerHTML = 'Loan Against Collateral<br>'+panel1Data[0].value+'%';
 
-            var panel2ResponseObject = await fetch("https://tnnode.turtlenetwork.eu/assets/balance/3JhY5JU9TsWJnuXXznZsSf2dGSNujkBQATA/7RB3BWayeCVPq3kkpkeJZAFv2DYCB5gEwnutEpRofaw4");
+            var panel2ResponseObject = await fetch("https://nodes.wavesnodes.com/assets/balance/3PHwL6FTA7Axjo44tpTGTjhgcfqc4xGY576/DG2xFkPdDwKUoBkzGAhQtLpSGzfXLiCYPEzeKH2Ad24p");
             panel2Data = await panel2ResponseObject.json();
-            document.getElementById("panel2").innerHTML = 'DApp Balance  in USDT<br>'+(panel2Data.balance/1000000).toFixed(2);
+            document.getElementById("panel2").innerHTML = 'DApp Balance  in USDN<br>'+(panel2Data.balance/1000000).toFixed(2);
 
-            var panel3ResponseObject = await fetch("https://tnnode.turtlenetwork.eu/addresses/data/3JhY5JU9TsWJnuXXznZsSf2dGSNujkBQATA?key=Total_Loan_Paid%3A");
+            var panel3ResponseObject = await fetch("https://nodes.wavesnodes.com/addresses/data/3PHwL6FTA7Axjo44tpTGTjhgcfqc4xGY576?key=Total_Loan_Paid%3A");
             panel3Data = await panel3ResponseObject.json();
-            document.getElementById("panel3").innerHTML = 'Total Loan Paid<br>'+panel3Data[0].value+' TN';
+            document.getElementById("panel3").innerHTML = 'Total Loan Paid<br>'+panel3Data[0].value+' WAVES';
 
-            var panel4ResponseObject = await fetch("https://tnnode.turtlenetwork.eu/blocks/height");
+            var panel4ResponseObject = await fetch("https://nodes.wavesnodes.com/blocks/height");
             panel4Data = await panel4ResponseObject.json();
             document.getElementById("panel4").innerHTML = 'Block Height<br>'+panel4Data.height;
             blockHeight = panel4Data.height;
@@ -225,7 +225,7 @@
                     if(searchResult[index].LoanAmount === undefined || String(searchResult[index].LoanAmount).length < 1){
                         output += '<td>N&#47;A</td>';
                     }else{
-                        output += '<td>'+(searchResult[index].LoanAmount/1000000)+' USDT</td>';
+                        output += '<td>'+(searchResult[index].LoanAmount/1000000)+' USDN</td>';
                     }
                     if(searchResult[index].LoanInterest === undefined || String(searchResult[index].LoanInterest).length < 1){
                         output += '<td>N&#47;A</td>';
@@ -272,7 +272,7 @@
         	const perblockinterest = 0.00000068
         	const interest = (perblockinterest*totalloanblocks)*amount;
         	const totalinterest = interest.toFixed(6);
-        	document.querySelector("#total").innerHTML = "Total Interest(TN): " + totalinterest;		
+        	document.querySelector("#total").innerHTML = "Total Interest(WAVES): " + totalinterest;		
         }
 		function exportTableToCSV(filename) {
 			var csv = [];
